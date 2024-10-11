@@ -17,7 +17,7 @@
 
 1. **Download** the mod from the [Modrinth page](https://modrinth.com/mod/item-components).
 2. **Install** the mod by placing the `.jar` file into your Minecraft `mods` folder.
-3. Ensure that you're using **Ignite Loader** to run the mod.
+3. Ensure that you're using [**Ignite Loader**](https://github.com/vectrix-space/ignite) to run the mod.
 
 ### Usage with Data Packs
 
