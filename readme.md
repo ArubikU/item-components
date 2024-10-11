@@ -37,7 +37,8 @@ Below is an example of a JSON file that adds a custom component to an item:
 		"eat_seconds": 0.8
 	}
   }
-}```
+}
+```
 
 Place this file in your data pack under data/<namespace>/item_components/<item_name>.json.
 
