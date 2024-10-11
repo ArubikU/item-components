@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -33,6 +34,7 @@ import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentPatch.SplitResult;
 import net.minecraft.core.component.PatchedDataComponentMap;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.resources.Resource;
@@ -75,11 +77,14 @@ public class ItemComponentsManager {
     }
 
     private void loadIntoMap(ResourceManager manager, Map<ResourceLocation, UnresolvedComponents> map) {
-        for (String namespace : manager.getNamespaces()) {
-            ResourceLocation resourcePath = ResourceLocation.fromNamespaceAndPath(namespace, DIRECTORY);
-            try {
-                Resource resource = manager.getResource(resourcePath).orElse(null);
+        FileToIdConverter finder = FileToIdConverter.json(ItemComponentsManager.DIRECTORY);
 
+        for (Entry<ResourceLocation, Resource> entry : finder.listMatchingResources(manager).entrySet()) {
+            ResourceLocation resourcePath = entry.getKey();
+            Resource resource = entry.getValue();
+
+            ResourceLocation resourceId = finder.fileToId(resourcePath);
+            try {
                 if (resource != null) {
                     try (BufferedReader reader = resource.openAsReader()) {
                         int priority;
@@ -116,7 +121,8 @@ public class ItemComponentsManager {
                     }
                 }
             } catch (Exception exception) {
-                LOGGER.error("Couldn't read components {} from namespace {} in data pack {}", resourcePath, namespace,
+                LOGGER.error("Couldn't read components {} from namespace {} in data pack {}, {}", resourceId,
+                        resourcePath, resource.sourcePackId(),
                         exception);
             }
         }
