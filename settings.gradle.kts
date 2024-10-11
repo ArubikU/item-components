@@ -3,6 +3,7 @@ pluginManagement {
   repositories {
     gradlePluginPortal()
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://plugins.gradle.org/m2/")
   }
 }
 
@@ -12,4 +13,4 @@ plugins {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "Itemcomponents"
+rootProject.name = "vectrix-item-components"

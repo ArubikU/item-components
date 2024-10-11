@@ -1,4 +1,4 @@
-rootProject.name = "ignite-template-build-logic"
+rootProject.name = "vectrix-item-components"
 
 dependencyResolutionManagement {
   repositories {

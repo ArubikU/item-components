@@ -1,10 +1,9 @@
 package com.boyonk.itemcomponents;
 
-
-import net.minecraft.component.ComponentMap;
+import net.minecraft.core.component.DataComponentMap;
 
 public interface BaseComponentSetter {
 
-	void itemcomponents$setBaseComponents(ComponentMap baseComponents);
+	void itemcomponents$setBaseComponents(DataComponentMap baseComponents);
 
 }
